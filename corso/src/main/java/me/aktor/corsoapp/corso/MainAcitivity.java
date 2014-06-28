@@ -44,12 +44,6 @@ public class MainAcitivity  extends FragmentActivity
 //        btn.setOnClickListener(click);
 //
 //
-
-        // access to main application
-        CorsoApp app =(CorsoApp) getApplication();
-
-        
-
     }
 
     @Override

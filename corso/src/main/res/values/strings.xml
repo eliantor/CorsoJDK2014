@@ -1,4 +1,7 @@
 <resources>
     <string name="app_name">CorsoApp</string>
     <string name="hello">Hello World!!!</string>
+    <string name="swap">Swap</string>
+    <string name="login">Login</string>
+    <string name="register">Registrati</string>
 </resources>
