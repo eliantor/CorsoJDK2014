@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:orientation="vertical"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent">
+<LinearLayout android:orientation="vertical"
               android:layout_width="match_parent"
-              android:layout_height="match_parent">
+              android:layout_height="wrap_content">
     <EditText
             android:id="@+id/edt_input"
             android:layout_width="match_parent"
@@ -18,4 +19,9 @@
             android:text="Share"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1000dp"
+        android:background="#F00"/>
 </LinearLayout>
+</ScrollView>
