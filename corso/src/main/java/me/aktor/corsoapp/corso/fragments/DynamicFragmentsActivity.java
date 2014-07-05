@@ -5,23 +5,37 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.view.View;
+import android.widget.TextView;
+
+import java.util.concurrent.TimeUnit;
 
 import me.aktor.corsoapp.corso.R;
+import me.aktor.corsoapp.corso.utils.Sleeper;
 
 /**
  * Created by Andrea Tortorella on 28/06/14.
  */
-public class DynamicFragmentsActivity extends FragmentActivity {
+public class DynamicFragmentsActivity extends FragmentActivity implements RetainedFragment.OnResultListener {
     public static final String LOGIN_FRAGMENT = "login_fragment_tag";
     public static final String REGISTER_FRAGMENT = "register_fragment_tag";
+    public static final String MEMORY = "MEMORY";
 
     private FragmentManager mManager;
+
+    private TextView mResult;
+
+
+    @Override
+    public void onResult(String result) {
+        mResult.setText(result);
+    }
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dynamic_fragments);
+        mResult = (TextView) findViewById(R.id.tv_result_wow);
 
         mManager = getSupportFragmentManager();
 
@@ -44,7 +58,22 @@ public class DynamicFragmentsActivity extends FragmentActivity {
                 }
 
         );
+
+        findViewById(R.id.btn_start_task).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Sleeper.sleepAndReturn(3000, TimeUnit.MILLISECONDS,"WWWWWWWWWW");
+                //startTask();
+            }
+        });
     }
+
+
+    private void startTask(){
+        RetainedFragment ret = (RetainedFragment) mManager.findFragmentByTag(MEMORY);
+        ret.requestResult("WOOWWW!");
+    }
+
 
     @Override
     public void onAttachFragment(Fragment fragment) {
@@ -62,7 +91,7 @@ public class DynamicFragmentsActivity extends FragmentActivity {
 
     private void initFragment(){
         mManager.beginTransaction()
-                .add(RetainedFragment.create(),"MEMORY")
+                .add(RetainedFragment.create(),MEMORY)
                 .commit();
     }
 
@@ -74,4 +103,5 @@ public class DynamicFragmentsActivity extends FragmentActivity {
                 .addToBackStack(null)
                 .commit();
     }
+
 }
