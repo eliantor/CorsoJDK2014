@@ -46,6 +46,20 @@ public class BaasboxHttp {
         return sSelf;
     }
 
+    public static final String COLLECTION= "posts";
+
+    public JSONObject uploadDocument(JSONObject object) throws JSONException,IOException {
+        RequestBody jsonBody = RequestBody.create(JSON,object.toString());
+        Request req = new Request.Builder()
+                        .url(URL+"/documents/"+COLLECTION)
+                        .post(jsonBody)
+                        .build();
+        Response r = mClient.newCall(req).execute();
+        String string = r.body().string();
+        JSONObject response = new JSONObject(string);
+        return response;
+    }
+
 
     public JSONObject signup(String username,String password) throws JSONException, IOException {
         JSONObject body = new JSONObject();
@@ -62,53 +76,6 @@ public class BaasboxHttp {
         //todo read response
         return null;
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 }
 
 

@@ -1,6 +1,7 @@
 package me.aktor.corsoapp.corso;
 
 import android.app.Application;
+import android.os.StrictMode;
 
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -22,14 +23,20 @@ public class CorsoApp extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+        if (BuildConfig.DEBUG) {
+            StrictMode.setThreadPolicy(new StrictMode.ThreadPolicy.Builder().detectAll().penaltyDeath().build());
+            StrictMode.setVmPolicy(new StrictMode.VmPolicy.Builder().detectAll().penaltyDeath().build());
+        }
         self = this;
         prefs = new PrefManager(this);
     }
 
 
+
     public static CorsoApp get(){
         return self;
     }
+
     public PrefManager getPref(){
         return prefs;
     }
@@ -39,3 +46,12 @@ public class CorsoApp extends Application {
     }
 
 }
+
+
+
+
+
+
+
+
+
